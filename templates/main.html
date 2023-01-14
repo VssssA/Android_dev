@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <style>
-
         .nav {
             width: 320px;
             min-width: 320px;
@@ -144,8 +143,6 @@
             text-transform: uppercase;
         }
 
-
-
         [id='nav-toggle']:checked ~ .nav h2 {
             opacity: 1;
             transform: scale(1, 1);
@@ -183,7 +180,6 @@
             transform: translateX(0);
         }
 
-
         .nav > ul > li:nth-child(2) {
             -webkit-transition: opacity .5s .2s, -webkit-transform .5s .2s;
             transition: opacity .5s .2s, transform .5s .2s;
@@ -198,7 +194,6 @@
             -webkit-transition: opacity .5s .4s, -webkit-transform .5s .4s;
             transition: opacity .5s .4s, transform .5s .4s;
         }
-
         .nav > ul > li:nth-child(5) {
             -webkit-transition: opacity .5s .5s, -webkit-transform .5s .5s;
             transition: opacity .5s .5s, transform .5s .5s;
@@ -214,29 +209,27 @@
             transition: opacity .5s .7s, transform .5s .7s;
         }
 
-
         .nav > ul > li > a {
             display: inline-block;
             position: relative;
             padding: 0;
             font-family: 'Open Sans', sans-serif;
+            color: #dadada;
+            text-decoration: none;
+            text-transform: uppercase;
             font-weight: 300;
             font-size: 1.2em;
-            color: #dadada;
             width: 100%;
-            text-decoration: none;
             -webkit-transition: color .5s ease, padding .5s ease;
             -moz-transition: color .5s ease, padding .5s ease;
             transition: color .5s ease, padding .5s ease;
         }
-
 
         .nav > ul > li > a:hover,
         .nav > ul > li > a:focus {
             color: white;
             padding-left: 15px;
         }
-
 
         .nav > ul > li > a:before {
             content: '';
@@ -277,7 +270,6 @@
             transition: width 0s ease;
         }
 
-
         .mask-content {
             display: block;
             position: fixed;
@@ -315,6 +307,7 @@
             padding: 0 15px;
             background: white;
             font-size: 16px;
+            margin-top: 100px;
         }
         .post-image img {
             width: 100%;
@@ -389,20 +382,42 @@
         .p_back{
             margin-right: 100px;
         }
+        .head{
+            background-color: #7B8489;
+            width: 2100px;
+            height: 58px;
+            margin-left: -100px;
+            padding-left: 800px;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 600;
+            font-size: 1.2em;
+            color: #dadada;
+            position: fixed;
+            padding-top: 15px;
+
+        }
+        .foot{
+            background-color: #7B8489;
+            width: 2100px;
+            height: 58px;
+            margin-left: -100px;
+            padding-left: 800px;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 600;
+            font-size: 1.2em;
+            color: #dadada;
+            padding-top: 15px;
+        }
     </style>
 
 </head>
+<header class="head">АНАЛИЗ ПРОФЕССИИ ANDROID-РАЗРАБОТЧИК</header>
 <body>
-
-    <h1>{% block header %}{% endblock header %}</h1>
-    <div>{% block content%}{% endblock content %}</div>
-
-
     <input type="checkbox" id="nav-toggle" hidden>
     <nav class="nav">
         <label for="nav-toggle" class="nav-toggle" onclick></label>
         <h2 class="logo">
-            <a href="//dbmast.ru/">Android разработчик</a>
+            <a href="//dbmast.ru/">Android-разработчик</a>
         </h2>
         <ul class="hidden-menu">
             <li><a href="/">Главная</a></li>
@@ -414,7 +429,8 @@
 
     </nav>
     <div class="mask-content"></div>
-    <header>
+    {% block content%}
+<header>
     <div class="container">
         <div class="post">
             <div class="post-image">
@@ -464,9 +480,10 @@
         </div>
     </div>
     </header>
+{% endblock %}
 </body>
-<footer>
-
+<footer class="foot">
+    Степанов Вадим Витальевич РИ-210910
 </footer>
 
 </html>

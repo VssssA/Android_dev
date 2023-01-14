@@ -2,3 +2,5 @@
 venv/
 templates/data
 .idea
+skills_by_city
+static
