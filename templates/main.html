@@ -1,16 +1,469 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <h1>текст</h1>
+    <style>
+
+        .nav {
+            width: 320px;
+            min-width: 320px;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            margin: 0;
+            left: -320px;
+            padding: 15px 20px;
+            -webkit-transition: left 0.3s;
+            -moz-transition: left 0.3s;
+            transition: left 0.3s;
+            background: #7B8489;
+            z-index: 2000;
+        }
+
+
+        .nav-toggle {
+            position: absolute;
+            left: 320px;
+            top: 1em;
+            padding: 0.5em;
+            background: inherit;
+            color: #dadada;
+            cursor: pointer;
+            font-size: 1.2em;
+            line-height: 1;
+            z-index: 2001;
+            -webkit-transition: color .25s ease-in-out;
+            -moz-transition: color .25s ease-in-out;
+            transition: color .25s ease-in-out;
+        }
+
+        .nav-toggle:after {
+            content: '\2630';
+            text-decoration: none;
+        }
+
+        .nav-toggle:hover {
+            color: #f4f4f4;
+        }
+
+
+        [id='nav-toggle'] {
+            position: absolute;
+            display: none;
+        }
+
+
+
+        [id='nav-toggle']:checked ~ .nav > .nav-toggle {
+            left: auto;
+            right: 2px;
+            top: 1em;
+        }
+
+
+
+        [id='nav-toggle']:checked ~ .nav {
+            left: 0;
+            box-shadow:4px 0px 20px 0px rgba(0,0,0, 0.5);
+            -moz-box-shadow:4px 0px 20px 0px rgba(0,0,0, 0.5);
+            -webkit-box-shadow:4px 0px 20px 0px rgba(0,0,0, 0.5);
+            overflow-y: auto;
+        }
+
+
+
+        [id='nav-toggle']:checked ~ main > article {
+            -webkit-transform: translateX(320px);
+            -moz-transform: translateX(320px);
+            transform: translateX(320px);
+        }
+
+
+        [id='nav-toggle']:checked ~ .nav > .nav-toggle:after {
+            content: '\2715';
+        }
+
+        body {
+            -webkit-animation: bugfix infinite 1s;
+        }
+
+        @-webkit-keyframes bugfix {
+            to {
+              padding: 0;
+            }
+        }
+
+        @media screen and (min-width: 320px) {
+            html,
+            body {
+              margin: 0;
+              overflow-x: hidden;
+            }
+        }
+
+        @media screen and (max-width: 320px) {
+            html,
+            body {
+              margin: 0;
+              overflow-x: hidden;
+            }
+            .nav {
+              width: 100%;
+              box-shadow: none
+            }
+        }
+
+
+        .nav h2 {
+            width: 90%;
+            padding: 0;
+            margin: 10px 0;
+            text-align: center;
+            text-shadow: rgba(255, 255, 255, .1) -1px -1px 1px, rgba(0, 0, 0, .5) 1px 1px 1px;
+            font-size: 1.3em;
+            line-height: 1.3em;
+            opacity: 0;
+            transform: scale(0.1, 0.1);
+            -ms-transform: scale(0.1, 0.1);
+            -moz-transform: scale(0.1, 0.1);
+            -webkit-transform: scale(0.1, 0.1);
+            transform-origin: 0% 0%;
+            -ms-transform-origin: 0% 0%;
+            -moz-transform-origin: 0% 0%;
+            -webkit-transform-origin: 0% 0%;
+            transition: opacity 0.8s, transform 0.8s;
+            -ms-transition: opacity 0.8s, -ms-transform 0.8s;
+            -moz-transition: opacity 0.8s, -moz-transform 0.8s;
+            -webkit-transition: opacity 0.8s, -webkit-transform 0.8s;
+        }
+
+        .nav h2 a {
+            color: #dadada;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+
+
+        [id='nav-toggle']:checked ~ .nav h2 {
+            opacity: 1;
+            transform: scale(1, 1);
+            -ms-transform: scale(1, 1);
+            -moz-transform: scale(1, 1);
+            -webkit-transform: scale(1, 1);
+        }
+
+
+        .nav > ul {
+            display: block;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .nav > ul > li {
+            line-height: 2.5;
+            opacity: 0;
+            -webkit-transform: translateX(-50%);
+            -moz-transform: translateX(-50%);
+            -ms-transform: translateX(-50%);
+            transform: translateX(-50%);
+            -webkit-transition: opacity .5s .1s, -webkit-transform .5s .1s;
+            -moz-transition: opacity .5s .1s, -moz-transform .5s .1s;
+            -ms-transition: opacity .5s .1s, -ms-transform .5s .1s;
+            transition: opacity .5s .1s, transform .5s .1s;
+        }
+
+        [id='nav-toggle']:checked ~ .nav > ul > li {
+            opacity: 1;
+            -webkit-transform: translateX(0);
+            -moz-transform: translateX(0);
+            -ms-transform: translateX(0);
+            transform: translateX(0);
+        }
+
+
+        .nav > ul > li:nth-child(2) {
+            -webkit-transition: opacity .5s .2s, -webkit-transform .5s .2s;
+            transition: opacity .5s .2s, transform .5s .2s;
+        }
+
+        .nav > ul > li:nth-child(3) {
+            -webkit-transition: opacity .5s .3s, -webkit-transform .5s .3s;
+            transition: opacity .5s .3s, transform .5s .3s;
+        }
+
+        .nav > ul > li:nth-child(4) {
+            -webkit-transition: opacity .5s .4s, -webkit-transform .5s .4s;
+            transition: opacity .5s .4s, transform .5s .4s;
+        }
+
+        .nav > ul > li:nth-child(5) {
+            -webkit-transition: opacity .5s .5s, -webkit-transform .5s .5s;
+            transition: opacity .5s .5s, transform .5s .5s;
+        }
+
+        .nav > ul > li:nth-child(6) {
+            -webkit-transition: opacity .5s .6s, -webkit-transform .5s .6s;
+            transition: opacity .5s .6s, transform .5s .6s;
+        }
+
+        .nav > ul > li:nth-child(7) {
+            -webkit-transition: opacity .5s .7s, -webkit-transform .5s .7s;
+            transition: opacity .5s .7s, transform .5s .7s;
+        }
+
+
+        .nav > ul > li > a {
+            display: inline-block;
+            position: relative;
+            padding: 0;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 300;
+            font-size: 1.2em;
+            color: #dadada;
+            width: 100%;
+            text-decoration: none;
+            -webkit-transition: color .5s ease, padding .5s ease;
+            -moz-transition: color .5s ease, padding .5s ease;
+            transition: color .5s ease, padding .5s ease;
+        }
+
+
+        .nav > ul > li > a:hover,
+        .nav > ul > li > a:focus {
+            color: white;
+            padding-left: 15px;
+        }
+
+
+        .nav > ul > li > a:before {
+            content: '';
+            display: block;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            height: 1px;
+            width: 100%;
+            -webkit-transition: width 0s ease;
+            transition: width 0s ease;
+        }
+
+        .nav > ul > li > a:after {
+            content: '';
+            display: block;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 1px;
+            width: 100%;
+            background: #D6DAD9;
+            -webkit-transition: width .5s ease;
+            transition: width .5s ease;
+        }
+
+        .nav > ul > li > a:hover:before {
+            width: 0%;
+            background: #D6DAD9;
+            -webkit-transition: width .5s ease;
+            transition: width .5s ease;
+        }
+
+        .nav > ul > li > a:hover:after {
+            width: 0%;
+            background: transparent;
+            -webkit-transition: width 0s ease;
+            transition: width 0s ease;
+        }
+
+
+        .mask-content {
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            visibility: hidden;
+            opacity: 0;
+        }
+
+        [id='nav-toggle']:checked ~ .mask-content {
+            visibility: visible;
+            opacity: 1;
+            -webkit-transition: opacity .5s, visibility .5s;
+            transition: opacity .5s, visibility .5s;
+        }
+        header{
+            margin-left: 50px;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: #606060;
+            font-size: 14px;
+        }
+        .container {
+            max-width: 960px;
+            margin: 50px auto;
+            padding: 0 15px;
+            background: white;
+            font-size: 16px;
+        }
+        .post-image img {
+            width: 100%;
+            margin: 0 0 20px 0;
+        }
+        .post h1 {
+            color: #222;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+        .post-meta {
+            margin-bottom: 30px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        time,
+        .author {
+            padding-right: 26px;
+            position: relative;
+        }
+        time:after,
+        .author:after {
+            content: "";
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #666;
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+        }
+        p {
+            line-height: 1.5;
+            margin-bottom: 1em;
+        }
+        @media (min-width: 768px) {
+            body {
+                font-size: 16px;
+            }
+
+            .container {
+                padding: 0 45px;
+            }
+
+            .post-image img {
+                float: right;
+                width: 300px;
+                margin: 0 0 20px 20px;
+            }
+
+            .post-header {
+                padding-left: 26px;
+                border-left: 4px solid #D8D8D8;
+                margin-left: -30px;
+            }
+        }
+        .border{
+            margin-top: 30px;
+            width: 700px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            padding-right: 10px;
+            padding-left: 0px;
+            margin-left: -30px;
+            border-left: 4px solid #D8D8D8;
+        }
+        h3{
+            font-size: 18px;
+            margin-top: 20px;
+        }
+        .p_back{
+            margin-right: 100px;
+        }
+    </style>
+
 </head>
 <body>
-    <div><a href="/">Главная</a> | <a href="/skills">Навыки</a> | <a href="/demand">Востребованность</a>
-    | <a href="/geography">География</a>
-    | <a href="/last-vacansies">Последнии вакансии</a></div>
+
     <h1>{% block header %}{% endblock header %}</h1>
     <div>{% block content%}{% endblock content %}</div>
-    <div>Степанов Вадим</div>
+
+
+    <input type="checkbox" id="nav-toggle" hidden>
+    <nav class="nav">
+        <label for="nav-toggle" class="nav-toggle" onclick></label>
+        <h2 class="logo">
+            <a href="//dbmast.ru/">Android разработчик</a>
+        </h2>
+        <ul class="hidden-menu">
+            <li><a href="/">Главная</a></li>
+            <li><a href="/demand">Востребованность</a></li>
+            <li><a href="/geography">География</a></li>
+            <li><a href="/skills">Навыки</a></li>
+            <li><a href="/last-vacansies">Последнии вакансии</a></li>
+        </ul>
+
+    </nav>
+    <div class="mask-content"></div>
+    <header>
+    <div class="container">
+        <div class="post">
+            <div class="post-image">
+                <img src="https://i.iheart.com/v3/url/aHR0cHM6Ly9zc2wtc3RhdGljLmxpYnN5bi5jb20vcC9hc3NldHMvYi85LzEvYy9iOTFjZDcxNjdkMzI2ZjhhLzIwMjAtMDEtMzAucG5n">
+            </div>
+            <div class="post-content">
+                <div class="post-header">
+                    <h1>Android-разработчик, кто это?</h1>
+                    <div class="post-meta">
+                        <time datetime="2023-01-14">Январь, 14</time>
+                        <span class="author">Степанов Вадим</span>
+                        <span class="category">Проект Python</span>
+                    </div>
+                </div>
+                <p>На Android сегодня работает около двух миллиардов устройств — от смартфонов и планшетов до умных холодильников и бытовых роботов.Людям нужны новые мессенджеры, службы для заказа еды и такси, банковские программы и, конечно, игры. На последние приходится около трети всех скачиваний.
+Все эти приложения пишут и поддерживают Android-разработчики.
+                </p>
+                <div class="border">
+                    <ul><h2>Какие языки программирования и технологии используют Android разработчики</h2>
+                        <li>Владеть несколькими языками программирования — Java, Kotlin, C#, JavaScript </li>
+                        <li>Знание XML </li>
+                        <li>Многие компании предлагают API (Application Programming Interface) для доступа к данным последовательным и безопасным способом.</li>
+                        <li>Уметь проектировать базы данных и писать запросы к ним — в MySQL или другой СУБД</li>
+                        <li>Архитектурные шаблоны</li>
+                        <li>Алгоритмы и структуры данных</li>
+                        <li>Обладать навыками разработки приложений в популярных фреймворках</li>
+                        <li>Иметь опыт юнит-тестирования</li>
+                        <li>Знать систему контроля версий Git</li>
+                        <li>UI/UX дизайн</li>
+                    </ul>
+                </div>
+                <h3>О профессии</h3>
+                <p class="p_back">
+Андроид разработчик — это IT-специалист, который создает, поддерживает и совершенствует программное обеспечение для мобильных устройств, использующих популярную ОС Android. Вместе с этим он задействован в процессах поддержки, улучшения и обновления разрабатываемых продуктов. Если посмотреть на количество устройств, которые используют данную ОС, можно прийти к выводу, что разработчик под платформу Андроид — очень востребован в IT, а также имеет высокие доходы. Какие технологии использует в своей работе этот специалист?
+                </p>
+                <h3>Сколько платят Android-разработчикам?</h3>
+                <p class="p_back">
+Разработчикам-новичкам предлагают зарплату 50–70 тысяч рублей, специалистам со стажем от двух лет — до 150 тысяч, а опытные Android-программисты могут рассчитывать на зарплату 200–300 тысяч. Есть вакансии с заработком больше 400 тысяч, но их немного.
+                </p>
+                <h3>Карьерный рост и перспективы</h3>
+                <p class="p_back">
+                    В Android-разработке, как и везде в IT, новичок начинает с позиции Junior, затем прокачивает скиллы и становится Middle. Через несколько лет может претендовать на позицию Senior, а наиболее успешные дорастают до тимлидов.
+С 2016 года в СМИ ходили слухи, что Google скоро заменит Android новой операционной системой Fuchsia — и Android-разработчики останутся не у дел. Всё прояснилось в 2019 году на конференции Google I/O: руководитель направления Android Хироши Локхаймер заверил, что компания не собирается отказываться от Android для смартфонов. Fuchsia будут применять в умных домах, носимой электронике и устройствах дополненной реальности.
+Но даже если Google неожиданно передумает, Android-программисты без работы не останутся: кому, как не им, переводить приложения на новую операционную систему.
+                </p>
+            </div>
+        </div>
+    </div>
+    </header>
 </body>
 <footer>
 
